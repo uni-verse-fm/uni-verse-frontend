@@ -1,0 +1,42 @@
+:root {
+  --base: #191724;
+  --surface: #1f1d2e;
+  --overlay: #26233a;
+  --muted: #6e6a86;
+  --subtle: #908caa;
+  --text: #e0def4;
+  --love: #eb6f92;
+  --gold: #f6c177;
+  --rose: #ebbcba;
+  --pine: #31748f;
+  --foam: #9ccfd8;
+  --iris: #c4a7e7;
+  --highlight-low: #21202e;
+  --highlight-med: #403d52;
+  --highlight-high: #524f67;
+
+  --accent: var(--pine);
+  --error: var(--love);
+
+  --rounding: 6px;
+
+  background-color: var(--base);
+  color: var(--text);
+}
+
+button {
+  border-radius: var(--rounding);
+  background-color: var(--accent);
+  border-style: none;
+  color: var(--text);
+  padding: 1em;
+  cursor: pointer;
+}
+
+input {
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: var(--rounding);
+  border-style: none;
+}
