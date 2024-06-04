@@ -1,33 +1,32 @@
 <script>
+	import GenericFormField from '$lib/components/generic-form-field.svelte';
+	import { selectClassValidatorErrors } from '$lib/helpers';
+
 	export let form;
-
-	let { email, username } = form ?? {};
-	$: ({ email, username } = form ?? { email: '', username: '' });
-
 </script>
 
 <div class="register-card">
 	<form method="POST">
-		<label>
-			<span>Username</span>
-			<input name="username" type="username" value={username} required />
-		</label>
-		<label>
-			<span>Email</span>
-			<input name="email" type="email" value={email} required />
-		</label>
-		<label>
-			<span>Password</span>
-			<input name="password" type="password" value={form?.password ?? ''} required />
-		</label>
-		<label>
-			<span>Confirm password</span>
-			<input name="confirm-password" type="password" value={form?.confirmPassword ?? ''} required />
-		</label>
-
-		{#if form?.error}
-			<p class="error">{form.error}</p>
-		{/if}
+		<GenericFormField
+			field="username"
+			value={form?.username?.toString()}
+			errors={selectClassValidatorErrors('username', form?.error)}
+			required
+		/>
+		<GenericFormField
+			field="email"
+			value={form?.email?.toString()}
+			errors={selectClassValidatorErrors('email', form?.error)}
+			type="email"
+			required
+		/>
+		<GenericFormField
+			field="password"
+			errors={selectClassValidatorErrors('password', form?.error)}
+			type="password"
+			required
+		/>
+		<GenericFormField field="confirm-password" label="Confirm password" type="password" required />
 
 		<button>Register</button>
 	</form>
@@ -48,18 +47,7 @@
 		margin: auto;
 	}
 
-	label {
-		display: flex;
-		justify-content: space-between;
-		margin: 1em;
-		vertical-align: middle;
-	}
-
 	button {
 		margin-top: 1em;
-	}
-
-	.error {
-		color: var(--error);
 	}
 </style>

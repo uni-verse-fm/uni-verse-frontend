@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-  default: async ({ cookies, request }) => {
+  default: async ({ request }) => {
     const data = await request.formData();
 
     const email = data.get('email');
@@ -12,21 +12,21 @@ export const actions: Actions = {
     const confirmPassword = data.get('confirm-password');
 
     if (password != confirmPassword) {
-      return fail(400, { error: 'Passwords do not match! ', email, username });
+      return fail(400, {
+        error: 'password does not match with password confirmation!',
+        email,
+        username
+      });
     }
 
-    await register(
-      username?.toString(),
-      email?.toString(),
-      password?.toString(),
-      confirmPassword?.toString()
-    )
-      .then((user) => {
-        cookies.set('session', user.token, { path: '/' });
-        throw redirect(303, '/');
-      })
-      .catch((error) => {
-        return fail(error.code, { ...error.message, username, email });
-      });
+    try {
+      // TODO: mail confirmation
+      await register(username?.toString(), email?.toString(), password?.toString());
+    } catch (e) {
+      const error = e as { code: number; message: string };
+      return fail(error.code, { ...error, username, email });
+    }
+
+    redirect(303, '/login');
   }
 };
