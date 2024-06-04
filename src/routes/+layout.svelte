@@ -1,6 +1,15 @@
 <script>
+	import { writable } from 'svelte/store';
 	import '../global.css';
 	import Header from './header.svelte';
+	import { setContext } from 'svelte';
+
+	export let data;
+
+	const session = writable();
+	$: session.set(data.session);
+
+	setContext('session', session);
 </script>
 
 <Header />
