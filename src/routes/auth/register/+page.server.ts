@@ -1,7 +1,6 @@
 import { register } from '$lib/api/auth';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { parseAstAsync } from 'vite';
 
 export const actions: Actions = {
   default: async ({ request }) => {
