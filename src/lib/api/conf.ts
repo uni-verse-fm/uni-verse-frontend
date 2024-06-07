@@ -1,9 +1,9 @@
 import { env } from '$env/dynamic/public';
 
-if (!env.PUBLIC_API_BASE_URL) {
-  throw new Error('PUBLIC_API_BASE_URL MUST BE SET!');
+if (process.env.NODE_ENV == "production" && !env.PUBLIC_SERVER_SIDE_API_BASE_URL) {
+  throw new Error('PUBLIC_SERVER_SIDE_API_BASE_URL MUST BE SET!');
 }
 
 export default {
-  apiBaseUrl: env.PUBLIC_API_BASE_URL
+  apiBaseUrl: env.PUBLIC_SERVER_SIDE_API_BASE_URL
 };
