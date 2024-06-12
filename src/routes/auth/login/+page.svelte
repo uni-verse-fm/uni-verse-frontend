@@ -5,7 +5,7 @@
 	export let form;
 </script>
 
-<div class="register-card">
+<div class="login-card">
 	<form method="POST">
 		<GenericFormField
 			field="email"
@@ -26,7 +26,7 @@
 </div>
 
 <style>
-	.register-card {
+	.login-card {
 		background-color: var(--overlay);
 		border-radius: var(--rounding);
 		padding: 3em;
