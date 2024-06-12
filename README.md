@@ -7,4 +7,4 @@ This project hosts the code for the main uni-verse webpage, allowing to use most
 You can:
 
 - [Access it](https://uni-verse.vagahbond.com)
-- [Learn more about it](https://uni-verese-fm.github.io/docs/frontend)
+- [Learn more about it](https://uni-verse-fm.github.io/docs/frontend)
