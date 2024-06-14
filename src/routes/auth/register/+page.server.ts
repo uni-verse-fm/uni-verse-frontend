@@ -12,15 +12,15 @@ export const actions: Actions = {
     const confirmPassword = data.get('confirm-password');
 
     if (!username) {
-      return fail(400, { error: 'username is required', email })
+      return fail(400, { error: 'username is required', email });
     }
 
     if (!email) {
-      return fail(400, { error: 'email is required', username })
+      return fail(400, { error: 'email is required', username });
     }
 
     if (!password) {
-      return fail(400, { error: 'password is required', password })
+      return fail(400, { error: 'password is required', password });
     }
 
     if (password != confirmPassword) {
@@ -39,6 +39,6 @@ export const actions: Actions = {
       return fail(error.code, { ...error, username, email });
     }
 
-    redirect(303, '/login');
+    redirect(303, '/auth/login');
   }
 };
