@@ -16,7 +16,7 @@
 
 <header>
 	<div class="branding">
-		<img src={Icon} alt="Uni-verse logo" width={30} height={30} />
+		<img src={Icon} alt="Uni-verse logo" width={50} height={50} />
 		<p>Uni-Verse</p>
 	</div>
 	<div class="">
@@ -45,7 +45,7 @@
 		right: 1em;
 		justify-content: space-between;
 		position: sticky;
-		padding: 1em;
+		padding: 0.5em;
 
 		border-radius: var(--rounding);
 	}
@@ -68,4 +68,13 @@
 		display: flex;
 		flex-direction: row;
 	}
+
+  .branding img {
+    padding: 0 1em;
+  }
+
+  .branding p {
+    font-size: 20px;
+    font-weight: bold;
+  }
 </style>
