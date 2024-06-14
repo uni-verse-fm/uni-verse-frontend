@@ -3,6 +3,7 @@
 	import Icon from '$lib/images/uni-verse-logo.svg';
 	import CreateSelector from './create_selector.svelte';
 	import { getContext } from 'svelte';
+	import 'iconify-icon';
 
 	function handleLogin() {
 		goto('/auth/login');
@@ -24,11 +25,13 @@
 		SearchBar here<!-- <SearchBar  /> -->
 	</div>
 	<div class="controlsSection">
-		<CreateSelector />
 		{#if $session}
 			<span> {$session.username} </span>
+			<CreateSelector />
 			<form method="POST" action="/auth/logout">
-				<button class="logoutButton">Logout</button>
+				<button class="logoutButton">
+					<iconify-icon icon="material-symbols:logout" />
+				</button>
 			</form>
 		{:else}
 			<button class="loginButton" on:click={handleLogin}>Login</button>
