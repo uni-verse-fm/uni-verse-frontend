@@ -55,8 +55,7 @@
 	}
 
 	.modal-button {
-		margin: auto 1em;
-		background-color: var(--pine);
+    margin-left: 1em;
 	}
 
 	.create-menu {

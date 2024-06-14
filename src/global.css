@@ -25,12 +25,18 @@
 }
 
 button {
+  transition: ease-out 0.2s;
   border-radius: var(--rounding);
-  background-color: var(--accent);
+  background-color: var(--pine);
   border-style: none;
   color: var(--text);
   padding: 1em;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--foam);
+  color: var(--base);
 }
 
 input {
