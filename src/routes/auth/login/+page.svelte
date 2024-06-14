@@ -6,6 +6,11 @@
 </script>
 
 <div class="login-card">
+	{#if form?.error}
+		<span class="errors">
+			{form?.error}
+		</span>
+	{/if}
 	<form method="POST">
 		<GenericFormField
 			field="email"
@@ -42,5 +47,9 @@
 
 	button {
 		margin-top: 1em;
+	}
+
+	.errors {
+		color: var(--error);
 	}
 </style>

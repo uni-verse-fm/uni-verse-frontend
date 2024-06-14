@@ -19,8 +19,9 @@ export const actions: Actions = {
       cookies.set('session', JSON.stringify(res), { path: '/' });
     } catch (e) {
       // TODO: Detect when wrong password
-      const error = e as { code: number; error: string };
-      return fail(error.code, { ...error, email });
+      const error = e as { code: number; message: string };
+
+      return fail(error.code, { error: error.message, email });
     }
 
     redirect(303, '/');
