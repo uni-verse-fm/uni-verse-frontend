@@ -40,3 +40,7 @@ input {
   border-radius: var(--rounding);
   border-style: none;
 }
+
+iconify-icon {
+  vertical-align: middle;
+}

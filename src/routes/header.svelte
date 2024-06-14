@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import Icon from '$lib/images/uni-verse-logo.svg';
+	import CreateSelector from './create_selector.svelte';
 	import { getContext } from 'svelte';
 
 	function handleLogin() {
@@ -22,7 +23,8 @@
 	<div class="">
 		SearchBar here<!-- <SearchBar  /> -->
 	</div>
-	<div class="authSection">
+	<div class="controlsSection">
+		<CreateSelector />
 		{#if $session}
 			<span> {$session.username} </span>
 			<form method="POST" action="/auth/logout">
@@ -37,7 +39,7 @@
 
 <style>
 	header {
-		background-color: var(--overlay);
+		background-color: var(--surface);
 		display: flex;
 		flex-direction: row;
 		top: 1em;
@@ -55,12 +57,12 @@
 		margin-bottom: auto;
 	}
 
-	.authSection {
+	.controlsSection {
 		display: flex;
 		flex-direction: row;
 	}
 
-	.authSection * {
+	.controlsSection * {
 		margin: auto 1em;
 	}
 
@@ -69,12 +71,12 @@
 		flex-direction: row;
 	}
 
-  .branding img {
-    padding: 0 1em;
-  }
+	.branding img {
+		padding: 0 1em;
+	}
 
-  .branding p {
-    font-size: 20px;
-    font-weight: bold;
-  }
+	.branding p {
+		font-size: 20px;
+		font-weight: bold;
+	}
 </style>
