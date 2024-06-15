@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let field;
 	export let label = field.charAt(0).toUpperCase() + field.slice(1);
-	export let value = '';
+	export let value: string | Blob = '';
 	export let required = false;
 	export let errors: Array<string> = [];
 	export let type = 'text';
