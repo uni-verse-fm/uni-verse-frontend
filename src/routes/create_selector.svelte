@@ -23,7 +23,8 @@
 			<button
 				class="create-button"
 				on:click={() => {
-					goto('/create/release');
+					showModal = false;
+					goto('/releases/create');
 				}}
 			>
 				Release
@@ -31,7 +32,8 @@
 			<button
 				class="create-button"
 				on:click={() => {
-					goto('/create/resource-pack');
+					showModal = false;
+					goto('/resource-packs/create');
 				}}
 			>
 				Resource pack
@@ -39,7 +41,8 @@
 			<button
 				class="create-button"
 				on:click={() => {
-					goto('/create/playlist');
+					showModal = false;
+					goto('/playlists/create');
 				}}
 			>
 				Playlist
@@ -55,7 +58,7 @@
 	}
 
 	.modal-button {
-    margin-left: 1em;
+		margin-left: 1em;
 	}
 
 	.create-menu {
