@@ -3,6 +3,7 @@
 	import { selectClassValidatorErrors } from '$lib/helpers';
 
 	export let form;
+  
 </script>
 
 <div class="login-card">
