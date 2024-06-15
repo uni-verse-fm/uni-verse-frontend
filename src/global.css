@@ -47,6 +47,10 @@ input {
   border-style: none;
 }
 
+textarea {
+  border-radius: var(--rounding);
+}
+
 iconify-icon {
   vertical-align: middle;
 }
