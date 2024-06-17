@@ -12,7 +12,7 @@ COPY . .
 # Build static version of the app
 RUN npm run build
 # Remove unused dev packages
-RUN npm prune --omit=dev
+RUN npm prune --omit dev
 
 # Second stage
 FROM docker.io/node:22-alpine
