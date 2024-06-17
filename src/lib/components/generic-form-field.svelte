@@ -33,4 +33,7 @@
 		margin: 1em;
 		vertical-align: middle;
 	}
+	span {
+		margin: auto 0;
+	}
 </style>
