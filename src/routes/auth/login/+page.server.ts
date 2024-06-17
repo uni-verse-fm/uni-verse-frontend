@@ -1,3 +1,4 @@
+import { buildJsonInit } from "$lib/api/utils"
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { buildSessionCookie } from '$lib/session';
@@ -16,11 +17,9 @@ export const actions: Actions = {
 
     const res = await fetch(`${apiConf.apiBaseUrl}/auth/login`,
       {
+        ...buildJsonInit({ email, password }),
+
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
       })
 
     const body = await res.json();
@@ -33,19 +32,5 @@ export const actions: Actions = {
 
     return fail(res.status, { error: body.message ?? res.statusText, email })
 
-    /*
-        try {
-    
-          const res = await login(email?.toString(), password?.toString());
-    
-        } catch (e) {
-          // TODO: Detect when wrong password
-          const error = e as { code: number; message: string };
-    
-          return fail(error.code, { errors: error.message, email });
-        }
-    
-        redirect(303, '/');
-    */
   }
 };
