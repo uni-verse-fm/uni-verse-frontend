@@ -4,7 +4,6 @@
 	import GenericFormField from '$lib/components/generic-form-field.svelte';
 
 	export let title = '';
-	export let file = '';
 
 	export let index;
 
@@ -15,5 +14,5 @@
 	<h2>Editing track NB {index}</h2>
 	<GenericFormField field="tracks[][title]" label="Title" value={title} type="text" {errors} />
 
-	<GenericFormField field="tracks[][file]" label="File" value={file} type="file" {errors} />
+	<GenericFormField field="tracks[][file]" label="File" type="file" {errors} />
 </div>

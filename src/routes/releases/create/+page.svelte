@@ -4,9 +4,17 @@
 	import 'iconify-icon';
 	import TrackForm from './track_form.svelte';
 
-	export let form: { error?: string; description?: string; cover?: Blob; title?: string } = {};
+	interface ReleaseFormData {
+		error?: string;
+		description?: string;
+		cover?: Blob;
+		title?: string;
+		tracks: { title: string; file: Blob }[];
+	}
 
-	let nbTracks = 1;
+	export let form: ReleaseFormData | null = {} as ReleaseFormData;
+
+	let nbTracks = form?.tracks.length ?? 1;
 
 	function handleTrackAdd(e: Event) {
 		e.preventDefault();
@@ -19,8 +27,6 @@
 			nbTracks -= 1;
 		}
 	}
-
-	$: console.log(form?.error);
 </script>
 
 <div class="form-card">
@@ -30,7 +36,7 @@
 			{form.error}
 		</p>
 	{/if}
-	<form method="POST">
+	<form method="POST" enctype="multipart/form-data">
 		<GenericFormField
 			field="title"
 			value={form?.title?.toString()}
@@ -40,15 +46,14 @@
 
 		<label>
 			<span>Description</span>
-			<textarea name="description" value={form?.description?.toString() ?? ''} />
+			<textarea name="description">{form?.description?.toString() ?? ''}</textarea>
 		</label>
 
-		<GenericFormField
-			field="cover"
-			value={form?.cover}
-			errors={selectClassValidatorErrors('cover', form?.error)}
-			type="file"
-		/>
+		<label>
+			<span>Cover</span>
+			<input type="file" accept="image/png, image/jpeg" name="cover" />
+		</label>
+
 		<div class="nb-tracks-row">
 			<span>Tracks in this release: {nbTracks}.</span>
 			<span>
@@ -62,7 +67,7 @@
 		</div>
 
 		{#each Array(nbTracks) as _, i}
-			<TrackForm index={i + 1} />
+			<TrackForm index={i + 1} title={form?.tracks[i].title} />
 		{/each}
 
 		<button class="register-button">Register</button>
@@ -82,6 +87,10 @@
 		display: flex;
 		flex-direction: column;
 		margin: auto;
+	}
+
+	form span {
+		margin: auto 0;
 	}
 
 	.register-button {
