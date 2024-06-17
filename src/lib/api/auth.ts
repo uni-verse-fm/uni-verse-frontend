@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import fetchApi from './lib';
+import { fetchApi } from './lib';
 
 export interface CreatedUser {
   email: string;

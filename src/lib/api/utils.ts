@@ -6,5 +6,10 @@ interface JsonInit {
 }
 
 export function buildJsonInit(payload: Record<string, unknown>): JsonInit {
-
+  return {
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
 } 
