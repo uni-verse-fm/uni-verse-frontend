@@ -10,7 +10,7 @@ export const actions: Actions = {
 
     const dataObject = {
       description: data.get('description'),
-      title: data.get('description'),
+      title: data.get('title'),
       tracks: data.getAll('tracks[][title]').map((t, i) => {
         return { title: t, originalFileName: (trackFiles[i] as File).name };
       })
@@ -23,10 +23,8 @@ export const actions: Actions = {
     adaptedData.set('cover', data.get('cover') as File);
     trackFiles.forEach((t) => adaptedData.append('tracks', t));
 
-    console.log(dataObject.tracks.length);
-    console.log(adaptedData.getAll('tracks'));
 
-    const res = await fetch(`${apiConfig.apiBaseUrl}/releases`, {
+    const res = await fetch(`${apiConfig.baseUrl}/releases`, {
       method: 'POST',
       body: adaptedData
     });
@@ -34,7 +32,7 @@ export const actions: Actions = {
     const parsed = await res.json();
 
     if (res.ok) {
-      return redirect(303, `/releases/${parsed.id}`);
+      return redirect(303, `/releases/${parsed._id}`);
     }
 
     const [title, description] = ['title', 'description'].map((n) => data.get(n));
