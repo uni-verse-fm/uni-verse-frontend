@@ -54,3 +54,8 @@ textarea {
 iconify-icon {
   vertical-align: middle;
 }
+
+iconify-icon svg {
+  place-self: middle;
+  margin: auto;
+}
