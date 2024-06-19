@@ -11,6 +11,8 @@ declare global {
     // interface Locals {}
     interface PageData {
       releases?: Release[];
+      release?: Release;
+      track?: string;
     }
     // interface PageState {}
     // interface Platform {}

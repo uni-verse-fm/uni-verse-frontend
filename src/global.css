@@ -19,13 +19,14 @@
   --error: var(--love);
 
   --rounding: 6px;
+  --transition: ease-out 0.2s;
 
   background-color: var(--base);
   color: var(--text);
 }
 
 button {
-  transition: ease-out 0.2s;
+  transition: var(--transition);
   border-radius: var(--rounding);
   background-color: var(--pine);
   border-style: none;
@@ -53,9 +54,4 @@ textarea {
 
 iconify-icon {
   vertical-align: middle;
-}
-
-iconify-icon svg {
-  place-self: middle;
-  margin: auto;
 }

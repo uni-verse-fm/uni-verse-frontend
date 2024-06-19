@@ -6,7 +6,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
   const res = await fetch(`${apiConfig.baseUrl}/releases`);
 
   const releases: Release[] = await res.json();
-  console.log(releases);
   return {
     releases
   };

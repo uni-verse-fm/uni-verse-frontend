@@ -8,6 +8,7 @@
 
 	const handleBrokenImageLink: EventHandler = (e) => {
 		const img = e.target as HTMLImageElement;
+		img.style.display = 'none';
 		img.src = Icon;
 	};
 </script>
@@ -31,10 +32,10 @@
 		</button>
 	</div>
 
-	<a class="author" title="See Artist" href={`/users/${release.author._id}`}
-		>{release.author.username}</a
-	>
 	<a class="title" title="See Release" href={`/releases/${release._id}`}>{release.title}</a>
+	<a class="author" title="See Artist" href={`/users/${release.author._id}`}>
+		{release.author.username}
+	</a>
 </div>
 
 <style>
@@ -108,5 +109,13 @@
 		text-decoration: none;
 		place-self: center;
 		margin: 0.5em;
+	}
+
+	.title {
+		font-size: 18px;
+	}
+
+	.author {
+		font-size: 16px;
 	}
 </style>
