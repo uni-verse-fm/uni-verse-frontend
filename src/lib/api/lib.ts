@@ -15,7 +15,7 @@ export class ApiError extends Error {
 }
 
 export async function fetchApiWithFile(request: RequestInfo, init: RequestInit, token?: string) {
-  const res = await fetch(`${Conf.apiBaseUrl}${request}`, {
+  const res = await fetch(`${Conf.baseUrl}${request}`, {
     ...init,
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -35,7 +35,7 @@ export async function fetchApi(
   request: RequestInfo,
   init?: CustomRequestInit | undefined
 ): Promise<Response> {
-  const res = await fetch(`${Conf.apiBaseUrl}${request}`, {
+  const res = await fetch(`${Conf.baseUrl}${request}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json'

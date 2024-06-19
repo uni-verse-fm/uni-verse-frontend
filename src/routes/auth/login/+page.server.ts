@@ -15,7 +15,7 @@ export const actions: Actions = {
       return fail(400, { error: 'password is required', email });
     }
 
-    const res = await fetch(`${apiConf.apiBaseUrl}/auth/login`,
+    const res = await fetch(`${apiConf.baseUrl}/auth/login`,
       {
         ...buildJsonInit({ email, password }),
 

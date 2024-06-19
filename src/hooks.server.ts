@@ -14,7 +14,7 @@ const handleApifetch: HandleFetch = async ({ request, event, fetch }) => {
   let accessToken = parsedSessionCookie.accessToken;
 
   if (isTokenExpired(parsedSessionCookie.accessToken)) {
-    const res = await fetch(`${apiConf.apiBaseUrl}/auth/refresh`, {
+    const res = await fetch(`${apiConf.baseUrl}/auth/refresh`, {
       headers: {
         Authorization: `Bearer ${parsedSessionCookie.refreshToken}`
       }
@@ -45,7 +45,7 @@ const handleApifetch: HandleFetch = async ({ request, event, fetch }) => {
 };
 
 export const handleFetch: HandleFetch = async (input) => {
-  if (input.request.url.startsWith(apiConf.apiBaseUrl)) {
+  if (input.request.url.startsWith(apiConf.baseUrl)) {
     return handleApifetch(input);
   }
 
