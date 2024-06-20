@@ -40,6 +40,7 @@ const handleApifetch: HandleFetch = async ({ request, event, fetch }) => {
   }
 
   request.headers.set('Authorization', `Bearer ${accessToken}`);
+  request.headers.set('Accept', 'application/json');
 
   return fetch(request);
 };
