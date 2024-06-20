@@ -13,6 +13,7 @@ declare global {
       releases?: Release[];
       release?: Release;
       track?: string;
+      error?: string;
     }
     // interface PageState {}
     // interface Platform {}
