@@ -4,10 +4,16 @@
 	import type { EventHandler } from 'svelte/elements';
 	import Track from './track.svelte';
 	import Comments from './comments.svelte';
+	import { getContext } from 'svelte';
+	import type { SessionInfos } from '$lib/session';
+	import type { Readable } from 'svelte/store';
+
+	let session: Readable<SessionInfos> = getContext('session');
 
 	export let data;
+	export let form;
 
-	let shownTrack: undefined | string = data.track;
+	let track: null | string = form?.track ?? data.track;
 
 	const handleBrokenImageLink: EventHandler = (e) => {
 		const img = e.target as HTMLImageElement;
@@ -16,7 +22,7 @@
 	};
 
 	function showTrackCallback(id: string) {
-		shownTrack = id;
+		track = id;
 	}
 </script>
 
@@ -36,22 +42,28 @@
 		</a>
 	</div>
 	<div class="tracks">
-		{#each data.release.tracks as track}
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
-			<Track {track} {showTrackCallback} />
+		{#each data.release.tracks as ctrack}
+			<Track track={ctrack} {showTrackCallback} selected={track == ctrack.id} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
+			<Track track={ctrack} {showTrackCallback} />
 		{/each}
 	</div>
 
-	{#if shownTrack != undefined}
-		<Comments trackId={shownTrack} />
+	{#if form?.error}
+		<span class="errors">
+			{form?.error}
+		</span>
+	{/if}
+
+	{#if track}
+		<Comments loggedIn={$session} trackId={track} />
 	{/if}
 </div>
 
@@ -119,5 +131,9 @@
 
 	.author {
 		font-size: 20px;
+	}
+
+	.errors {
+		color: var(--error);
 	}
 </style>
