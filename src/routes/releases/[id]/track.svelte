@@ -1,9 +1,9 @@
 <script>
 	import 'iconify-icon';
-	import Comments from './comments.svelte';
 
 	export let track;
 	export let showTrackCallback;
+	export let selected = false;
 </script>
 
 <div class="track-container">
@@ -14,11 +14,15 @@
 	>
 		<iconify-icon icon="material-symbols:play-circle-outline-rounded" />
 	</button>
-	<button title="Show song" class="track" on:click={() => showTrackCallback(track.id)}>
+	<button
+		title="Show song"
+		class="track"
+		class:selected
+		on:click={() => showTrackCallback(track.id)}
+	>
 		<span>{track.title}</span>
 	</button>
 </div>
-
 
 <style>
 	.track-container {
@@ -38,6 +42,10 @@
 		display: flex;
 		flex-direction: row;
 		font-size: 16px;
+	}
+
+	.track.selected {
+		color: var(--accent);
 	}
 
 	.track:hover {
