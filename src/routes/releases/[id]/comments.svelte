@@ -2,19 +2,24 @@
 	import ApiConf from '$lib/api/conf';
 	import type { Comment } from '$lib/api/types';
 	import LikeRadioButton from '$lib/components/like-radio-button.svelte';
-	import { onMount } from 'svelte';
+	import { afterUpdate, beforeUpdate, onDestroy, onMount } from 'svelte';
+	import BrokenProfilePicture from '$lib/images/profile.svg';
+	import MinioConf from '$lib/minio/conf';
+	import 'iconify-icon';
+	import { slide } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
 
-	export let trackId;
+	export let trackId: string;
+
 	export let loggedIn;
 
-	let comments: Comment[] = [];
-
-	onMount(async () => {
-		comments = await fetch(`${ApiConf.baseUrl}/comments/track/${trackId}`).then((c) => c.json());
-	});
+	async function getComments(track: string) {
+		console.log('Fetching comments', track);
+		return await fetch(`${ApiConf.baseUrl}/comments/track/${trackId}`).then((c) => c.json());
+	}
 </script>
 
-<div class="comments">
+<div transition:slide={{ delay: 250, duration: 300, easing: quintOut, axis: 'y' }} class="comments">
 	{#if loggedIn}
 		<div class="leave-comment-label">Leave a comment :</div>
 		<form method="post" action={`?/comment`} class="new-comment-form">
@@ -27,24 +32,34 @@
 			</button>
 		</form>
 	{/if}
-	{#each comments as comment}
-		<div class="comment">
-			<div class="comment-header">
-				<img class="avatar" alt={`${comment.owner.username}'s profile picture`} />
-				<div class="username">{comment.owner.username}</div>
+	{#await getComments(trackId)}
+		loading comments...
+	{:then comments}
+		{#each comments as comment}
+			<div
+				transition:slide={{ delay: 250, duration: 300, easing: quintOut, axis: 'y' }}
+				class="comment"
+			>
+				<div class="avatar">
+					<img class="placeholder" src={BrokenProfilePicture} alt="Avatar placeholder" />
+					<img src={`${MinioConf.baseUrl}/images/${comment.owner?.profilePicture}`} alt="Avatar" />
+				</div>
+				<a class="username" href={`/users/${comment.owner._id}`}>{comment.owner.username}</a>
 				<div class="positive">
 					{#if comment.isPositive}
-						Good
+						<iconify-icon icon="material-symbols:thumb-up" />
 					{:else}
-						Bad
+						<iconify-icon icon="material-symbols:thumb-down" />
 					{/if}
 				</div>
+				<div class="content">
+					{comment.content}
+				</div>
 			</div>
-			<div class="content">
-				{comment.content}
-			</div>
-		</div>
-	{/each}
+		{/each}
+	{:catch e}
+		{e.message}
+	{/await}
 </div>
 
 <style>
@@ -87,21 +102,62 @@
 		grid-template:
 			'pp username pos'
 			'content content content';
+		grid-template-columns: 1fr 2fr 2fr;
+		gap: 1em;
+		padding: 1em;
 	}
 
 	.avatar {
 		grid-area: pp;
+		border-radius: 50%;
+		aspect-ratio: 1;
+		display: grid;
+
+		height: 1em;
+		overflow: hidden;
+		font-size: 2em;
+
+		border: 1px solid var(--accent);
+		margin: 0.2em;
+	}
+
+	.avatar img {
+		border-radius: 50%;
+		overflow: hidden;
+		text-indent: 100%;
+		grid-area: 1/1;
+		object-fit: cover;
+		width: 1em;
+	}
+
+	.avatar .placeholder {
+		font-size: 1.2em;
+		margin-left: -0.08em;
+		background-color: var(--surface);
 	}
 
 	.username {
+		color: var(--text);
+		vertical-align: middle;
+		place-self: center;
 		grid-area: username;
+		text-decoration: none;
+	}
+
+	.username:hover {
+		color: var(--accent);
+		text-decoration: underline;
 	}
 
 	.positive {
 		grid-area: pos;
+		place-self: center end;
+		font-size: 1.5em;
+		color: var(--accent);
 	}
 
 	.content {
 		grid-area: content;
+		padding: 0 0.5em;
 	}
 </style>

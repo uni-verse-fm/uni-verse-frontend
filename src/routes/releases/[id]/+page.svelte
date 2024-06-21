@@ -37,22 +37,16 @@
 	</div>
 	<div class="release-infos">
 		<h1>{data.release.title}</h1>
-		<a href={`/users/${data.release.author._id}`} class="author">
+		<a href={`/users/${data.release.author.id}`} class="author">
 			{data.release.author.username}
 		</a>
+	</div>
+	<div class="decription">
+		{data.release.description}
 	</div>
 	<div class="tracks">
 		{#each data.release.tracks as ctrack}
 			<Track track={ctrack} {showTrackCallback} selected={track == ctrack.id} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
-			<Track track={ctrack} {showTrackCallback} />
 		{/each}
 	</div>
 
@@ -77,10 +71,11 @@
 		display: grid;
 		grid-template-areas:
 			'cover infos '
+			'cover desc '
 			'cover tracks '
 			'comments tracks ';
-		grid-template-columns: 20vw auto;
-		grid-template-rows: 10vw 10vw auto;
+		grid-template-columns: 18vw auto;
+		grid-template-rows: 6vw 6vw 6vw auto;
 		gap: 1em;
 	}
 
