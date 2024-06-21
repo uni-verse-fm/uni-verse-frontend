@@ -1,8 +1,6 @@
 <script lang="ts">
 	import ApiConf from '$lib/api/conf';
-	import type { Comment } from '$lib/api/types';
 	import LikeRadioButton from '$lib/components/like-radio-button.svelte';
-	import { afterUpdate, beforeUpdate, onDestroy, onMount } from 'svelte';
 	import BrokenProfilePicture from '$lib/images/profile.svg';
 	import MinioConf from '$lib/minio/conf';
 	import 'iconify-icon';
