@@ -53,6 +53,7 @@
 		margin: 0.5em;
 		object-fit: cover;
 		border-radius: var(--rounding);
+		overflow: hidden;
 		place-self: center;
 		display: grid;
 		grid-template-columns: 1fr;

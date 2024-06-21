@@ -2,14 +2,9 @@
 	import BrokenImageIcon from '$lib/images/broken-image.svg';
 	import MinioConf from '$lib/minio/conf.js';
 	import type { EventHandler } from 'svelte/elements';
-	import { getContext } from 'svelte';
-	import type { SessionInfos } from '$lib/session';
-	import type { Readable } from 'svelte/store';
-	import Release from './release.svelte';
+	import Release from '$lib/components/release.svelte';
 
 	export let data;
-
-  $:console.log(data.releases)
 
 	const handleBrokenImageLink: EventHandler = (e) => {
 		const img = e.target as HTMLImageElement;
@@ -22,7 +17,7 @@
 	<div class="pp">
 		<img src={BrokenImageIcon} alt="User pp placeholder" />
 		<img
-			src={`${MinioConf.baseUrl}/images/${data.user}`}
+			src={`${MinioConf.baseUrl}/images/${data.user.profilePicture}`}
 			alt="User pp"
 			on:error={handleBrokenImageLink}
 		/>
@@ -31,11 +26,10 @@
 		<h1>{data.user.username}</h1>
 	</div>
 	<div class="decription">Stats about this user are on their way!</div>
+	<h1 class="releases-header">Releases</h1>
 	<div class="releases">
-    AAAAAAAA
 		{#each data.releases as release}
-			<Release />
-			{release.title}
+			<Release {release} />
 		{/each}
 	</div>
 </div>
@@ -51,6 +45,7 @@
 		grid-template-areas:
 			'pp infos '
 			'pp desc '
+			'rh rh'
 			'releases releases ';
 		grid-template-columns: 20vw auto;
 		grid-template-rows: 10 10vw auto;
@@ -66,6 +61,7 @@
 		height: 100%;
 		object-fit: pp;
 		border-radius: var(--rounding);
+		overflow: hidden;
 		grid-area: pp;
 		place-self: center;
 		display: grid;
@@ -89,5 +85,13 @@
 
 	.releases {
 		grid-area: releases;
+		display: grid;
+		gap: 2em;
+		width: 100%;
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.releases-header {
+		grid-area: rh;
 	}
 </style>

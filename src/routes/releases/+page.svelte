@@ -1,5 +1,5 @@
 <script>
-	import Release from './release.svelte';
+	import Release from '$lib/components/release.svelte';
 	export let data;
 </script>
 
