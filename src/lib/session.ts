@@ -3,6 +3,7 @@ export interface SessionInfos {
   username: string;
   accessToken: string;
   refreshToken: string;
+  profilePicture: string;
 }
 
 export class InvalidSessionError extends Error {

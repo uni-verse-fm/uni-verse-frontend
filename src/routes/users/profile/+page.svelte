@@ -2,6 +2,7 @@
 	import type { EventHandler } from 'svelte/elements';
 	import BrokenImageIcon from '$lib/images/broken-image.svg';
 	import MinioConf from '$lib/minio/conf.js';
+	import GenericFormField from '$lib/components/generic-form-field.svelte';
 
 	export let data;
 
@@ -24,20 +25,27 @@
 	<div class="user-infos">
 		<h1>{data.user.username}</h1>
 	</div>
-	<div class="decription">
-		<form>
-			<button>Stripe onboard</button>
+	<div class="forms">
+		<form
+			class="profile-form"
+			method="post"
+			action="?/profilePicture"
+			enctype="multipart/form-data"
+		>
+			<label>
+				<span>Profile picture</span>
+				<input name="profilePicture" type="file" required />
+			</label>
+			<button>Upload an image picture</button>
 		</form>
 
 		<form>
 			<button>Password change</button>
 		</form>
 		<form>
-			<button>Upload an image picture</button>
+			<button>Stripe onboard</button>
 		</form>
-		Stats about this user are on their way!
 	</div>
-	<h1 class="releases-header">Releases</h1>
 </div>
 
 <style>
@@ -50,11 +58,9 @@
 		display: grid;
 		grid-template-areas:
 			'pp infos '
-			'pp desc '
-			'rh rh'
-			'releases releases ';
-		grid-template-columns: 20vw auto;
-		grid-template-rows: 10 10vw auto;
+			'controls controls';
+		grid-template-columns: 10vw auto;
+		grid-template-rows: 10 10vw;
 		gap: 1em;
 	}
 
@@ -89,7 +95,20 @@
 		color: var(--text);
 	}
 
-	.releases-header {
-		grid-area: rh;
+	.forms {
+		display: flex;
+		grid-area: controls;
+		width: 100%;
+		justify-content: space-around;
+	}
+
+	.profile-form {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.profile-form label {
+		display: grid;
+		grid-template-columns: 1fr;
 	}
 </style>

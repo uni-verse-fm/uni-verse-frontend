@@ -54,11 +54,11 @@
 <style>
 	.container {
 		position: relative;
-		display: inline-block;
+		display: grid;
 	}
 
 	.modal-button {
-		margin-left: 1em;
+		margin: auto 1em auto 1em;
 	}
 
 	.create-menu {
