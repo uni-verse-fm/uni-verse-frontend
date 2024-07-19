@@ -2,9 +2,9 @@
 	import type { EventHandler } from 'svelte/elements';
 	import BrokenImageIcon from '$lib/images/broken-image.svg';
 	import MinioConf from '$lib/minio/conf.js';
-	import GenericFormField from '$lib/components/generic-form-field.svelte';
 
 	export let data;
+	export let form;
 
 	const handleBrokenImageLink: EventHandler = (e) => {
 		const img = e.target as HTMLImageElement;
@@ -24,6 +24,15 @@
 	</div>
 	<div class="user-infos">
 		<h1>{data.user.username}</h1>
+		{#if form?.error}
+			<span class="error">
+				{form?.error}
+			</span>
+		{:else if form?.message}
+			<span class="message">
+				{form?.message}
+			</span>
+		{/if}
 	</div>
 	<div class="forms">
 		<form
@@ -39,10 +48,19 @@
 			<button>Upload an image picture</button>
 		</form>
 
-		<form>
+		<form class="profile-form" method="post" action="?/passwordChange">
+			<label>
+				<span>Password</span>
+				<input name="password" type="password" required />
+			</label>
+			<label>
+				<span>Confirm password</span>
+				<input name="passwordConfirm" type="password" required />
+			</label>
+
 			<button>Password change</button>
 		</form>
-		<form>
+		<form class="profile-form" method="post" action="?/stripeOnboard">
 			<button>Stripe onboard</button>
 		</form>
 	</div>
@@ -103,12 +121,19 @@
 	}
 
 	.profile-form {
-		display: grid;
+		display: flex;
+		flex-direction: column;
 		grid-template-columns: 1fr;
+		justify-content: space-between;
 	}
 
 	.profile-form label {
 		display: grid;
 		grid-template-columns: 1fr;
+		padding: 1em;
+	}
+
+	.error {
+		color: var(--error);
 	}
 </style>
