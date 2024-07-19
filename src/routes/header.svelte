@@ -9,6 +9,7 @@
 	import type { EventHandler } from 'svelte/elements';
 	import type { Readable } from 'svelte/store';
 	import type { SessionInfos } from '$lib/session';
+	import SearchBar from './search_bar.svelte';
 
 	function handleLogin() {
 		goto('/auth/login');
@@ -32,8 +33,8 @@
 		<img src={Icon} alt="Uni-verse logo" width={50} height={50} />
 		<p>Uni-Verse</p>
 	</div>
-	<div class="">
-		SearchBar here<!-- <SearchBar  /> -->
+	<div class="search-bar">
+		<SearchBar />
 	</div>
 	<div class="controlsSection">
 		{#if $session}
@@ -110,6 +111,7 @@
 		overflow: hidden;
 		place-self: center;
 		display: grid;
+		grid-area: 1 / 1;
 	}
 
 	.pp img {
@@ -117,9 +119,10 @@
 		border-radius: 50%;
 		overflow: hidden;
 		object-fit: cover;
+		width: 3em;
+		height: 3em;
 		grid-area: 1 / 1;
 		place-self: center;
-		font-size: 0;
 		color: var(--text);
 	}
 
